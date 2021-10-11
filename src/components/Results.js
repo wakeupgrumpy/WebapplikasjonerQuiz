@@ -6,6 +6,7 @@ const Results = ({ result, startNewQuiz }) => {
 
   return (
     <section className="wrapper col w-1/2 m-auto animate-fade">
+      <h1 className="emoji-xl">🏆</h1>
       <p className="text-center text-3xl font-semibold">
         {calcPercent(correctAnswers, totalQuestions)}% riktig,
       </p>
