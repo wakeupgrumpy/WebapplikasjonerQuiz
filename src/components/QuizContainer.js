@@ -28,7 +28,7 @@ const QuizContainer = ({ questions, startNewQuiz }) => {
     const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange']
     return {
       title,
-      helper: helper.text,
+      helper: helper?.text || 'Ingen hint til dette spørsmålet.',
       answers: answers.sort(() => 0.5 - Math.random()),
       colors: colors.sort(() => 0.5 - Math.random()),
     }
