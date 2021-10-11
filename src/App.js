@@ -30,7 +30,8 @@ const App = () => {
     <main className="w-3/5 mb-auto mt-10 m-auto py-6 flex flex-col space-y-6">
       {quizQuestions.length === 0 ? (
         <QuizSetup
-          props={{ startQuiz, quizCount, numQuesions, setNumQuesions }}
+          questionData={{ quizCount, numQuesions }}
+          quizHandlers={{ startQuiz, setNumQuesions }}
         />
       ) : (
         <QuizContainer questions={quizQuestions} startNewQuiz={startNewQuiz} />

@@ -1,5 +1,6 @@
-const QuizSetup = ({ props }) => {
-  const { startQuiz, quizCount, numQuesions, setNumQuesions } = props
+const QuizSetup = ({ questionData, quizHandlers }) => {
+  const { startQuiz, setNumQuesions } = quizHandlers
+  const { quizCount, numQuesions } = questionData
 
   const updateNum = (event) => setNumQuesions(event.target.value)
   const setSliderMax = () => setNumQuesions(quizCount)
