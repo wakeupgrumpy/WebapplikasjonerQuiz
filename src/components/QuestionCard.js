@@ -47,7 +47,7 @@ const QuestionCard = ({ question, answerHandler }) => {
         </div>
       </section>
       {showHint && (
-        <section className="wrapper col bg-blue-100">
+        <section className="wrapper col bg-blue-100 animate-fade">
           <h1 className="header">Hint:</h1>
           <p className="font-mono">{helper}</p>
           <button

@@ -6,7 +6,7 @@ const QuizSetup = ({ props }) => {
   const startQuizHandler = () => startQuiz()
 
   return (
-    <section className="wrapper col w-1/2 m-auto">
+    <section className="wrapper col w-1/2 m-auto animate-fade">
       <h1 className="header">Hvor mange spørsmål?</h1>
       <div className="items-baseline">
         <input

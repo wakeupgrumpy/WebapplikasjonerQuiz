@@ -5,7 +5,7 @@ const Results = ({ result, startNewQuiz }) => {
   const startNew = () => startNewQuiz()
 
   return (
-    <section className="wrapper col w-1/2 m-auto">
+    <section className="wrapper col w-1/2 m-auto animate-fade">
       <p className="text-center text-3xl font-semibold">
         {calcPercent(correctAnswers, totalQuestions)}% riktig,
       </p>
