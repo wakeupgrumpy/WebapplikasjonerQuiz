@@ -47,6 +47,9 @@
   .header-xl {
     @apply text-2xl font-semibold;
   }
+  .emoji-xl {
+    @apply text-center text-4xl;
+  }
 
   /* Quiz Answer Cards */
   .answer {
