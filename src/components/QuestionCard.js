@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 const QuestionCard = ({ question, answerHandler }) => {
   const { title, answers, colors, helper } = question
@@ -7,20 +7,23 @@ const QuestionCard = ({ question, answerHandler }) => {
   const [buttonClickable, setButtonClickable] = useState(true)
   const [showHint, setShowHint] = useState(false)
 
-  const checkAnswer = (event) => {
-    setButtonClickable(false)
-    const correct = answers[event.target.value]?.correct
-    event.target.innerHTML = correct ? 'Riktig!' : 'Feil!'
+  const checkAnswer = useCallback(
+    (event) => {
+      setButtonClickable(false)
+      const correct = answers[event.target.value]?.correct
+      event.target.innerHTML = correct ? 'Riktig!' : 'Feil!'
 
-    if (correct) {
-      setTimeout(() => {
-        setButtonClickable(true)
-        correctAnswer()
-      }, 1500)
-    } else setShowHint(true)
-  }
+      if (correct) {
+        setTimeout(() => {
+          setButtonClickable(true)
+          correctAnswer()
+        }, 1500)
+      } else setShowHint(true)
+    },
+    [correctAnswer, answers]
+  )
 
-  const nextQuiestionClick = () => {
+  const nextQuestionClick = () => {
     setShowHint(false)
     setButtonClickable(true)
     nextQuestion()
@@ -51,7 +54,7 @@ const QuestionCard = ({ question, answerHandler }) => {
           <button
             type="button"
             className="btn-blue w-1/3 mx-auto"
-            onClick={nextQuiestionClick}
+            onClick={nextQuestionClick}
           >
             Neste
           </button>
