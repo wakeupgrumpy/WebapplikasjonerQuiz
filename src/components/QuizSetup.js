@@ -1,17 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getCategories, getQuestionCount, getQuestions } from '../storage/db'
 
 const QuizSetup = ({ setQuestions }) => {
   const [categories, setCategories] = useState([])
-  const [availableQuestions, setAvailableQuestions] = useState(0)
-  const [numQuestions, setNumQuestions] = useState(1)
+  const [availableQuestions, setAvailableQuestions] = useState(1)
+  const [numQuestions, setNumQuestions] = useState(0)
 
   const updateNum = (event) => setNumQuestions(event.target.value)
   const setSliderMax = () => setNumQuestions(availableQuestions)
-  const updateSilderParams = (count) => {
-    setAvailableQuestions(count)
-    if (numQuestions > count) setNumQuestions(count)
-  }
+
   const startQuizHandler = () => {
     setQuestions(getQuestions(numQuestions, categories))
   }
@@ -23,8 +20,14 @@ const QuizSetup = ({ setQuestions }) => {
         (category) => category !== event.target.id
       )
     setCategories(tempSelectedCategories)
-    updateSilderParams(getQuestionCount(tempSelectedCategories))
   }
+
+  useEffect(() => {
+    const count = getQuestionCount(categories)
+    setAvailableQuestions(count)
+    if (numQuestions > count) setNumQuestions(count)
+    console.log(categories)
+  }, [categories, numQuestions])
 
   return (
     <>
@@ -71,7 +74,8 @@ const QuizSetup = ({ setQuestions }) => {
             <button
               type="button"
               onClick={startQuizHandler}
-              className="btn-blue"
+              className="btn-blue disabled:opacity-50"
+              disabled={numQuestions === 0}
             >
               GO!
             </button>
