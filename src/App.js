@@ -5,10 +5,7 @@ import QuizContainer from './components/QuizContainer'
 
 const App = () => {
   const [questions, setQuestions] = useState([])
-
-  const startNewQuiz = () => {
-    setQuestions([])
-  }
+  const startNewQuiz = () => setQuestions([])
 
   return (
     <main className="w-3/5 mb-auto mt-10 m-auto py-6 flex flex-col space-y-6">
