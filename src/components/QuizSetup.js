@@ -26,14 +26,12 @@ const QuizSetup = ({ setQuestions }) => {
     const count = getQuestionCount(categories)
     setAvailableQuestions(count)
     if (numQuestions > count) setNumQuestions(count)
-    console.log(categories)
   }, [categories, numQuestions])
 
   return (
     <>
       <section className="wrapper col w-1/2 m-auto animate-fade">
         <h1 className="header">Velg kategorier:</h1>
-
         <ul className="ul-col-2 w-100">
           {getCategories().map((cat, i) => (
             <li key={i} className="p-1">
