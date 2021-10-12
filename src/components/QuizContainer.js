@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import QuestionCard from './QuestionCard'
 import QuizStatus from './QuizStatus'
@@ -8,11 +8,9 @@ const QuizContainer = ({ questions, startNewQuiz }) => {
   const [currentQuestionId, setCurrentQuestionId] = useState(0)
   const [correctAnswers, setCorrectAnswers] = useState(0)
   const [quizComplete, setQuizComplete] = useState(false)
+  const [question, setQuestion] = useState()
 
   const totalQuestions = questions.length
-
-  const questionInfo = (id) => questions[id]
-  const { title, answers, helper } = questionInfo(currentQuestionId)
 
   const nextQuestion = () => {
     if (currentQuestionId === totalQuestions - 1) setQuizComplete(true)
@@ -24,15 +22,17 @@ const QuizContainer = ({ questions, startNewQuiz }) => {
     nextQuestion()
   }
 
-  const question = useMemo(() => {
+  useEffect(() => {
     const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange']
-    return {
+    const { title, answers, helper } = questions[currentQuestionId]
+
+    setQuestion({
       title,
       helper: helper?.text || 'Ingen hint til dette spørsmålet.',
       answers: answers.sort(() => 0.5 - Math.random()),
       colors: colors.sort(() => 0.5 - Math.random()),
-    }
-  }, [title, answers, helper])
+    })
+  }, [currentQuestionId, questions])
 
   return quizComplete ? (
     <Results
@@ -45,10 +45,12 @@ const QuizContainer = ({ questions, startNewQuiz }) => {
         quizInfo={{ currentQuestionId, totalQuestions, correctAnswers }}
         startNewQuiz={startNewQuiz}
       />
-      <QuestionCard
-        question={question}
-        answerHandler={{ correctAnswer, nextQuestion }}
-      />
+      {question && (
+        <QuestionCard
+          question={question}
+          answerHandler={{ correctAnswer, nextQuestion }}
+        />
+      )}
     </>
   )
 }
