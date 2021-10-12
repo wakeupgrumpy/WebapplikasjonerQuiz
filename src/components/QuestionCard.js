@@ -31,20 +31,18 @@ const QuestionCard = ({ question, answerHandler }) => {
       <section className="wrapper">
         <h1 className="header-xl text-center">{title}</h1>
       </section>
-      <section className="wrapper">
-        <div className="grid grid-cols-2 justify-items-stretch gap-4">
-          {answers.map((answer, i) => (
-            <button
-              type="button"
-              key={i}
-              value={i}
-              onClick={buttonClickable ? checkAnswer : null}
-              className={`answer ${colors[i]}`}
-            >
-              {answer.answere}
-            </button>
-          ))}
-        </div>
+      <section className="wrapper grid grid-cols-2 justify-items-stretch gap-4">
+        {answers.map((answer, i) => (
+          <button
+            type="button"
+            key={i}
+            value={i}
+            onClick={buttonClickable ? checkAnswer : null}
+            className={`answer ${colors[i]}`}
+          >
+            {answer.answere}
+          </button>
+        ))}
       </section>
       {showHint && (
         <section className="wrapper col bg-blue-100 animate-fade">
